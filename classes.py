@@ -383,13 +383,7 @@ def immigration():
     if config.simulation_time % 120 == 0:
         if random.randint(0, 100) > 75:
             side = random.randint(0, 2)
-            x, y  = config.road_entry[side]
-            config.humans.append(human(x, y))
-            man = config.humans[-1]
-            man.goal = 'immigrate'
-            man.target = config.entrances[side]
-            man.homeward_bound = True
-            config.human_group.append(man)
+            append_new_human(side, 'immigrate')
 
 
 def help():
@@ -398,7 +392,6 @@ def help():
         if (config.base_food < config.amount_humans * 7) and (config.time_since_help > 30) and config.amount_humans > 50:
             config.time_since_help = 0
             side = random.randint(-1, 0)
-            x, y = config.road_entry[side]
             append_new_human(side, 'help')
             delivererposition = len(config.humans)-1
             for i in range(random.randint(1,4)):
@@ -411,7 +404,9 @@ def append_new_human(side, goal):
     if goal in ('immigrate', 'help'):
         man.goal = goal
         man.target = config.entrances[side]
+        man.target = centre(man.target)
         man.homeward_bound = True
+        man.spawn = True
         config.human_group.append(man)
     elif type(goal) == int:
         config.human_guards.append(man)

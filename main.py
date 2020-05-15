@@ -74,7 +74,7 @@ def draw():
     classes.background_draw()
 
     if len(config.human_group) < config.amount_humans//5 and config.forest_food + config.house_ammo + config.house_medicine + config.house_food > 10:
-        config.human_group = list(filter(lambda h: h not in config.human_guards, config.humans))[0 : int(config.amount_humans // 5)]
+        config.human_group += list(filter(lambda h: h not in config.human_guards, config.humans))[0 : int(config.amount_humans // 5)]
     
     elif config.forest_food + config.house_ammo + config.house_medicine + config.house_food > 10:
         for human in config.human_group:
@@ -133,7 +133,6 @@ def draw():
     for human in config.human_guards:
         if human.colour == config.human_colour:
             human.colour = config.guard_colour
-        #print(config.human_guards)
         if not human.guard_target:
             try:
                 if random.randint(0, 100) > 15:
@@ -189,7 +188,7 @@ def draw():
 
     for human in config.humans:
         human.draw()
-
+        
         if (config.simulation_time - 1 ) % config.fps == 0:
             if random.randint(0, 10000) < (100 * config.amount_of_dead_per_day):
                 config.humans.remove(human)
