@@ -91,19 +91,15 @@ buildings_east = [building_east_1, building_east_2, building_east_3, building_ea
 buildings = [building_north_1, building_north_2, building_north_3, building_north_4, building_east_1, building_east_2, building_east_3, building_east_4, building_east_5, building_east_6]
 
 # Forest food amount
-forest_food = 50000
+forest_food = 50000000
 
 # House resources
-house_food = 10000
-house_ammo = 30000
+house_food = 1000000
+house_ammo = 300000
 house_medicine = 10000
 
 # Entrances
-'''
-north_entrance = (765, 279, 30, 30)
-east_entrance = (625, 424, 30, 30)
-west_entrance = (450, 335, 37, 28)
-'''
+
 north_entrance = (783, 290, 2, 2)
 east_entrance = (642, 440, 2, 2)
 west_entrance = (466, 347, 2, 2)
