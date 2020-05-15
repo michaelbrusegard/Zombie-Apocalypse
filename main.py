@@ -389,6 +389,7 @@ while main:
     classes.help()
     classes.zombie_spawn()
 
+    # Sickness and medicine
     classes.res_growth()
     classes.medicine_effects()
 
