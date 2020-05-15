@@ -275,50 +275,47 @@ class textInput :
         window.blit(self.textSurface, (self.rect.x + 5, self.rect.y + 5))
         pygame.draw.rect(window, self.colour, self.rect, 2)
 
-#gammel versjon ikke bruk
-'''
-def entrance(entrancex, entrancey, size, human):
-    if entrancex < human.x < entrancex + size:
-        if entrancey < human.y < entrancey + size:
-            human.passive = True
-            human.x = random.randint(527, 697)
-            human.y = random.randint(255, 425)
-'''
+
 
 #If humans try to enter base
 def entrance(entrance, human):
+    
+    # Only allows entrance to humans on the way back
     if human.homeward_bound:
+        
         if entrance[0] < human.x < entrance[0] + entrance[2]:
+            
             if entrance[1] < human.y < entrance[1] + entrance[3]:
-                #print(human)
-                #human.x = random.randint(527, 697)
-                #human.y = random.randint(255, 425)
                 base_sector = config.base_triangles[random.randint(0, 7)]
                 spawn_point = point_on_triangle(base_sector[0], base_sector[1], base_sector[2])
                 human.x, human.y = (int(spawn_point[0]), int(spawn_point[1]))
                 
+                # Measures days without food
                 if config.base_food == 0:
                     config.days_without_food = 0
 
+                # Adds food collected in forests
                 if human.goal == 'food':
                     if config.forest_food > 0:
                         human.val_save = random.randint(50, 100) + random.randint(50, 150)
                         config.base_food += human.val_save
                         config.forest_food -= human.val_save
                 
+                # Adds supplies brought by immigrants
                 elif human.goal == 'immigrate':
                     config.human_group.remove(human)
                     config.base_food += random.randint(5, 30)
                     config.base_ammo += random.choice(config.chance_ammo)
                     config.base_medicine += random.choice(config.chance_medicine)
                 
+                # Adds supplies brought by helping neighbours
                 elif human.goal == 'help':
                     config.human_group.remove(human)
                     config.base_food += random.randint(50, 300)
                     config.base_ammo += random.choice(config.chance_ammo) * 10
                     config.base_medicine += random.choice(config.chance_medicine) * 10
 
-
+                # Adds supplies from buildings
                 elif human.goal:
                     if config.house_food > 0:
                         human.val_save = random.randint(5, 30)
@@ -335,7 +332,7 @@ def entrance(entrance, human):
                         config.base_medicine += human.val_save
                         config.house_medicine -= human.val_save
 
-                
+                # Not in use
                 if human.delete and human.goal:
                     try:
                         config.human_group.remove(human)
@@ -343,7 +340,7 @@ def entrance(entrance, human):
                         None
                     human.delete = False
                 
-                
+                # Resets Boolean
                 human.homeward_bound = False
                 human.target = False
                 human.goal = False
@@ -402,6 +399,7 @@ def point_on_triangle(pt1, pt2, pt3):
     return (s * pt1[0] + (t - s) * pt2[0] + (1 - t) * pt3[0],
             s * pt1[1] + (t - s) * pt2[1] + (1 - t) * pt3[1])
 
+# Checks for closest point in a list
 def closest(list, human):
     closest = 999999
 
@@ -455,13 +453,15 @@ def append_new_human(side, goal):
         man.guard_target = config.humans[goal]
         #print(goal)
 
+# Not in use
 def res_growth():
     if config.simulation_time % 360 == 0:
-        config.forest_food += 1000
-        config.house_food += 500
-        config.house_ammo += 10
-        config.house_medicine += 2
+        config.forest_food += 10000
+        config.house_food += 5000
+        config.house_ammo += 100
+        config.house_medicine += 20
 
+# Finds a random point within a zone
 def random_centre(t):
     return (t[0] + (random.randint(0, t[2])), t[1] + (random.randint(0, t[3])))
 
