@@ -453,7 +453,7 @@ def append_new_human(side, goal):
         man.guard_target = config.humans[goal]
         #print(goal)
 
-# Not in use
+# Practically unused
 def res_growth():
     if config.simulation_time % 360 == 0:
         config.forest_food += 10000
