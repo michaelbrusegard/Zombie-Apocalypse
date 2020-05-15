@@ -1,6 +1,6 @@
 Requirements:
--Python3 (Used versions 3.8.1 and 3.8.2)
--Pygame (Used version 2.0.0dev6)
+- Python3 (Used versions 3.8.1 and 3.8.2)
+- Pygame (Used version 2.0.0dev6)
 
 Tracking distance is the distance a zombie can see humans and run to them.
 Shooting distance is the range guards can shoot zombies. Guards are faster humans with guns in a draker shade of red. Theyn protect the humans getting supplies.
