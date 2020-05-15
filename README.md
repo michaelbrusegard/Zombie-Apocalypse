@@ -15,6 +15,6 @@
 * Medicine is how much medicine the humans start with.
 
 ##### Keybinds:
-G - Cycle through graphs (The first shows human/zombie population on the y-axis with time in days on the x-axis. The second shows the amount of human deaths and births every day). PS! Keeping this on decreases fps substantialy every time the graph updates (one time every second)
-B - Shows supply stats (Food, ammo and medicine)
-F - Shows fps.
+- G - Cycle through graphs (The first shows human/zombie population on the y-axis with time in days on the x-axis. The second shows the amount of human deaths and births every day). PS! Keeping this on decreases fps substantialy every time the graph updates (one time every second)
+- B - Shows supply stats (Food, ammo and medicine)
+- F - Shows fps.
