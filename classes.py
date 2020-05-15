@@ -27,24 +27,21 @@ class human:
         self.colour = config.human_colour
     
     def scavenge(self, target_x, target_y):
-        if not config.simulation_time % config.human_slowness == 0:
-            if not human in config.human_guards:
-                self.vector_x = target_x - self.x
-                self.vector_y = target_y - self.y
-                distance = math.hypot(self.vector_x, self.vector_y)
-                self.vector_x = self.vector_x / distance
-                self.vector_y = self.vector_y / distance
-                self.x += int(self.vector_x * config.human_move_errand_speed_multiplier)
-                self.y += int(self.vector_y * config.human_move_errand_speed_multiplier)
+        if not human in config.human_guards:
+            if not config.simulation_time % config.human_slowness == 0:
+                self.scavenge_move(target_x, target_y)
         if human in config.human_guards:
-            self.vector_x = target_x - self.x
-            self.vector_y = target_y - self.y
-            distance = math.hypot(self.vector_x, self.vector_y)
-            self.vector_x = self.vector_x / distance
-            self.vector_y = self.vector_y / distance
-            self.x += int(self.vector_x * config.human_move_errand_speed_multiplier)
-            self.y += int(self.vector_y * config.human_move_errand_speed_multiplier)
+            self.scavenge_move(target_x, target_y)
     
+    def scavenge_move(self, target_x, target_y):
+        self.vector_x = target_x - self.x
+        self.vector_y = target_y - self.y
+        distance = math.hypot(self.vector_x, self.vector_y)
+        self.vector_x = self.vector_x / distance
+        self.vector_y = self.vector_y / distance
+        self.x += int(self.vector_x * config.human_move_errand_speed_multiplier)
+        self.y += int(self.vector_y * config.human_move_errand_speed_multiplier)
+            
     def set_goal(self):
         if config.base_food < (config.amount_humans * 30):
             self.goal = 'food'
@@ -83,10 +80,12 @@ class human:
 
     def attack(self, target):
         if (self.x-target.x) ** 2 +(self.y + target.y) < config.gunning_distance ** 2:
-            if config.simulation_time % 60 == 0:
+            if config.simulation_time % 20 == 0:
                 config.base_ammo -= 1
                 if random.randint(0, 3) > 1:
                     config.zombies.remove(target)
+            elif config.simulation_time % 3 == 0:
+                self.scavenge(target.x, target.y)
         else:
             self.scavenge(target.x, target.y)
 
@@ -312,7 +311,10 @@ def entrance(entrance, human):
 
                 
                 if human.delete and human.goal:
-                    config.human_group.remove(human)
+                    try:
+                        config.human_group.remove(human)
+                    except ValueError:
+                        None
                     human.delete = False
                 
                 
@@ -394,6 +396,7 @@ def help():
     if config.simulation_time % 60 == 0:
         config.time_since_help += 1
         if (config.base_food < config.amount_humans * 7) and (config.time_since_help > 30) and config.amount_humans > 50:
+            config.time_since_help = 0
             side = random.randint(-1, 0)
             x, y = config.road_entry[side]
             append_new_human(side, 'help')
@@ -410,10 +413,10 @@ def append_new_human(side, goal):
         man.target = config.entrances[side]
         man.homeward_bound = True
         config.human_group.append(man)
-    elif type(goal) == 'int':
+    elif type(goal) == int:
         config.human_guards.append(man)
         man.guard_target = config.humans[goal]
-        print(goal)
+        #print(goal)
 
 def res_growth():
     if config.simulation_time % 360 == 0:
@@ -427,14 +430,26 @@ def random_centre(t):
 
 def medicine_effects():
     if config.simulation_time % 120 == 0:
-        if random.randint(0, 1000//config.amount_humans) == 0:
-            if config.base_medicine > 0:
-                config.base_medicine -= 1
-            else:
-                human = random.choice(config.humans)
-                config.humans.remove(human)
-                config.deaths += 1
-                if human in config.human_group:
-                    config.human_group.remove(human)
-                elif human in config.human_guards:
-                    config.human_guards.remove(human)
+        try:
+            if random.randint(0, 1000//config.amount_humans) == 0:
+                if config.base_medicine > 0:
+                    config.base_medicine -= 1
+                else:
+                    human = random.choice(config.humans)
+                    config.humans.remove(human)
+                    config.deaths += 1
+                    if human in config.human_group:
+                        config.human_group.remove(human)
+                    elif human in config.human_guards:
+                        config.human_guards.remove(human)
+        except ZeroDivisionError:
+            print('Humans died')
+
+def zombie_spawn():
+    spawningday = 10800
+    if config.simulation_time % (spawningday) == 0:
+        spawningday += 1
+        if spawningday == 10820:
+            spawningday = 10800
+        spawn_area = random.choice((config.zombie_spawn_south, config.zombie_spawn_north))
+        config.zombies.append(zombie(spawn_area[0] + random.randint(-100, 100), spawn_area[1]+random.randint(-100, 100)))

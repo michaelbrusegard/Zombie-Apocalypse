@@ -73,8 +73,8 @@ for i in range(zombiecount):
 def draw():
     classes.background_draw()
 
-    if len(config.human_group) < 3 and config.forest_food + config.house_ammo + config.house_medicine + config.house_food > 10:
-        config.human_group = list(filter(lambda h: h not in config.human_group, config.humans[0 : int(config.amount_humans // 5)]))
+    if len(config.human_group) < config.amount_humans//5 and config.forest_food + config.house_ammo + config.house_medicine + config.house_food > 10:
+        config.human_group = list(filter(lambda h: h not in config.human_guards, config.humans))[0 : int(config.amount_humans // 5)]
     
     elif config.forest_food + config.house_ammo + config.house_medicine + config.house_food > 10:
         for human in config.human_group:
@@ -145,7 +145,7 @@ def draw():
                 None
                 #Shouldn't run, but does sometimes, idk
 
-        elif type(human.guard_target) == 'tuple':
+        elif type(human.guard_target) == tuple:
             human.scavenge(human.guard_target[0], human.guard_target[1])
             if config.base_ammo > 0:
                 for zombie in config.zombies:
@@ -166,23 +166,25 @@ def draw():
                     None
                     #Shouldn't run, but does sometimes, idk
             else:
-                human.guard_target = classes.point_on_triangle(base_sector[0], base_sector[1], base_sector[2])
-
-        elif human.guard_target.targeted:
-            if config.base_ammo > 0:
-                for zombie in config.zombies:
-                    if zombie.target == human.guard_target:
-                        human.guard_target = zombie
-                        break
-            else:
+                base_sector = config.base_triangles[random.randint(0, 7)]
                 human.guard_target = classes.point_on_triangle(base_sector[0], base_sector[1], base_sector[2])
 
         else:
-            try:
-                human.scavenge(human.guard_target.x + 10, human.guard_target.y + 10)
-            except ZeroDivisionError:
-                None
-        
+            if config.base_ammo > 0:
+                targetedzombie = False
+                for zombie in config.zombies:
+                    if (human.x - zombie.x) ** 2 + (human.y-zombie.y) ** 2 < (config.gunning_distance + 10) ** 2:
+                        human.guard_target = zombie
+                        targetedzombie = True
+                        break
+                if not targetedzombie:
+                    try:
+                        human.scavenge(human.guard_target.x + 10, human.guard_target.y + 10)
+                    except ZeroDivisionError:
+                        None
+            else:
+                base_sector = config.base_triangles[random.randint(0, 7)]
+                human.guard_target = classes.point_on_triangle(base_sector[0], base_sector[1], base_sector[2])
         
 
     for human in config.humans:
@@ -314,6 +316,7 @@ while main:
     classes.immigration()
     classes.birth()
     classes.help()
+    classes.zombie_spawn()
     pygame.display.flip()
     config.clock.tick(config.fps)
     classes.res_growth()
