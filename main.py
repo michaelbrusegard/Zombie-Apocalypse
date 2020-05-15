@@ -12,7 +12,7 @@ pygame.init()
 pygame.mixer.init()
 
 pygame.mixer.music.load('music.ogg')
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.play(-1)
 
 #Menu values
 menu = True
@@ -231,7 +231,7 @@ def draw():
             if config.base_ammo > 0:
                 targetedzombie = False
                 for zombie in config.zombies:
-                    if (human.x - zombie.x) ** 2 + (human.y-zombie.y) ** 2 < (config.gunning_distance + 10) ** 2:
+                    if (human.x - zombie.x) ** 2 + (human.y - zombie.y) ** 2 < (config.gunning_distance + 10) ** 2:
                         human.guard_target = zombie
                         targetedzombie = True
                         break
