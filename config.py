@@ -38,8 +38,8 @@ life_expectancy = 60
 death_rate = 2 / 1000
 amount_kids_per_day = ((amount_humans * reproduction_level_perhuman) / (life_expectancy * 365))
 amount_of_dead_per_day = ((amount_humans * death_rate) / 365)
-chance_medicine = [1, 0, 0, 0]
-chance_ammo = [1, 2, 3, 0]
+chance_medicine = [1, 0, 0, 0, 0]
+chance_ammo = [1, 2, 3, 0, 0]
 human_slowness = 4
 human_guards = []
 gunning_distance = 50
@@ -59,10 +59,10 @@ zombie_colour = (0, 255, 0)
 # Base settings
 base_stats_colour = (85, 85, 85)
 base_center = (581, 349)
-base_food = 15000
+base_food = 5000
 days_without_food = 0
-base_medicine = 50
-base_ammo = 150
+base_medicine = 30
+base_ammo = 100
 base = ((417, 442 - human_height / 2), (519, 269 - human_height / 2), (493, 210 - human_height / 2), (573 - human_width / 2, 176), (801 - human_width, 310), (722 - human_width, 444 - human_height), (643 - human_width, 431 - human_height), (489 - human_width / 2, 539 - human_height))
 base_triangles = []
 for i in range(len(base)):

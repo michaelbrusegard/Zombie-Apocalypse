@@ -30,11 +30,11 @@ class human:
     
     #Defines how fast humans run (guards are faster)
     def scavenge(self, target_x, target_y):
-        if not human in config.human_guards:
-            if not config.simulation_time % config.human_slowness == 0:
-                self.scavenge_move(target_x, target_y)
         if human in config.human_guards:
             self.scavenge_move(target_x, target_y)
+        else:
+            if not config.simulation_time % config.human_slowness == 0:
+                self.scavenge_move(target_x, target_y)
     
     #Moves humans to target
     def scavenge_move(self, target_x, target_y):
@@ -302,7 +302,7 @@ def entrance(entrance, human):
 
                 if human.goal == 'food':
                     if config.forest_food > 0:
-                        human.val_save = random.randint(50, 100) + random.randint(50, 150) + random.randint(20, 100)
+                        human.val_save = random.randint(50, 100) + random.randint(50, 150)
                         config.base_food += human.val_save
                         config.forest_food -= human.val_save
                 
@@ -486,8 +486,8 @@ def medicine_effects():
 def zombie_spawn():
     spawningday = 10800
     if config.simulation_time % (spawningday) == 0:
-        spawningday += 1
-        if spawningday == 10820:
+        spawningday += 2
+        if spawningday == 10840:
             spawningday = 10800
         spawn_area = random.choice((config.zombie_spawn_south, config.zombie_spawn_north))
         config.zombies.append(zombie(spawn_area[0] + random.randint(-100, 100), spawn_area[1]+random.randint(-100, 100)))

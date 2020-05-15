@@ -1,4 +1,4 @@
-#
+#Basic modules
 import pygame
 import random
 import math
@@ -92,8 +92,8 @@ def draw():
 
     #Checks if new humans should be added to human_group (active group of humans), and adds new humans if true
     if len(config.human_group) < config.amount_humans//5 and config.forest_food + config.house_ammo + config.house_medicine + config.house_food > 10:
-        config.human_group += list(filter(lambda h: h not in config.human_guards, config.humans))[0 : int(config.amount_humans // 5)]
-    
+        config.human_group += list(filter(lambda h: (h not in config.human_guards) and (h not in config.human_group), config.humans))[0 : int(config.amount_humans // 5)]
+        #config.human_group = list(filter(lambda h: h not in config.human_guards, config.humans))[0 : int(config.amount_humans // 5)]
 
     elif config.forest_food + config.house_ammo + config.house_medicine + config.house_food > 10:
         for human in config.human_group:
@@ -101,7 +101,7 @@ def draw():
     
     #Checks if new humans should be added to human_guards (attacking humans), and adds new humans if truee
     if len(config.human_guards) < config.amount_humans // 20:
-        config.human_guards += random.sample(list(filter(lambda h: h not in config.human_group, config.humans)), min(5, config.amount_humans//10))
+        config.human_guards += random.sample(list(filter(lambda h: (h not in config.human_group) and (h not in config.human_guards), config.humans)), min(5, config.amount_humans//10))
 
     #Updates every zombie
     for zombie in config.zombies:

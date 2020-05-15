@@ -1,8 +1,8 @@
 # Zombie Apocalypse
 
 #### Requirements:
-* Python3 (Used versions 3.8.1 and 3.8.2)
-* Pygame (Used version 2.0.0dev6)
+* Python3 (Used versions 3.8.1, 3.8.2 and 3.8.3) *when installing, remember to check 'td/tk and IDLE' if not checked matplotlib will not work*
+* Pygame (Used version 2.0.0dev6) *Install using 'pip3 install pygame==2.0.0dev6' in terminal*
 
 ##### Menu Variables
 * Humans is the amount of humans spawned in the base at start.
