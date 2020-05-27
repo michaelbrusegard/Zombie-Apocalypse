@@ -38,8 +38,8 @@ life_expectancy = 60
 death_rate = 2 / 1000
 amount_kids_per_day = ((amount_humans * reproduction_level_perhuman) / (life_expectancy * 365))
 amount_of_dead_per_day = ((amount_humans * death_rate) / 365)
-chance_medicine = [1, 0, 0, 0]
-chance_ammo = [1, 2, 3, 0]
+chance_medicine = [1, 0, 0, 0, 0]
+chance_ammo = [1, 2, 3, 0, 0]
 human_slowness = 4
 human_guards = []
 gunning_distance = 50
@@ -59,10 +59,10 @@ zombie_colour = (0, 255, 0)
 # Base settings
 base_stats_colour = (85, 85, 85)
 base_center = (581, 349)
-base_food = 15000
+base_food = 5000
 days_without_food = 0
-base_medicine = 50
-base_ammo = 150
+base_medicine = 30
+base_ammo = 100
 base = ((417, 442 - human_height / 2), (519, 269 - human_height / 2), (493, 210 - human_height / 2), (573 - human_width / 2, 176), (801 - human_width, 310), (722 - human_width, 444 - human_height), (643 - human_width, 431 - human_height), (489 - human_width / 2, 539 - human_height))
 base_triangles = []
 for i in range(len(base)):
@@ -91,19 +91,15 @@ buildings_east = [building_east_1, building_east_2, building_east_3, building_ea
 buildings = [building_north_1, building_north_2, building_north_3, building_north_4, building_east_1, building_east_2, building_east_3, building_east_4, building_east_5, building_east_6]
 
 # Forest food amount
-forest_food = 50000
+forest_food = 50000000
 
 # House resources
-house_food = 10000
-house_ammo = 30000
+house_food = 1000000
+house_ammo = 300000
 house_medicine = 10000
 
 # Entrances
-'''
-north_entrance = (765, 279, 30, 30)
-east_entrance = (625, 424, 30, 30)
-west_entrance = (450, 335, 37, 28)
-'''
+
 north_entrance = (783, 290, 2, 2)
 east_entrance = (642, 440, 2, 2)
 west_entrance = (466, 347, 2, 2)

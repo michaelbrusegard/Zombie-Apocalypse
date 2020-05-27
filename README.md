@@ -1,8 +1,9 @@
 # Zombie Apocalypse
 
 #### Requirements:
-* Python3 (Used versions 3.8.1 and 3.8.2)
-* Pygame (Used version 2.0.0dev6)
+* Python3 (Used versions 3.8.1, 3.8.2 and 3.8.3) *When installing, remember to check 'td/tk and IDLE' if not checked matplotlib will not work*
+* Pygame (Used version 2.0.0dev6) *Install using 'pip3 install pygame==2.0.0dev6' in terminal*
+* Jupyter *Run 'pip3 install jupyter'*
 
 ##### Menu Variables
 * Humans is the amount of humans spawned in the base at start.
@@ -14,6 +15,9 @@
 * Medicine is how much medicine the humans start with.
 
 ##### Keybinds:
-G - Cycle through graphs (The first shows human/zombie population on the y-axis with time in days on the x-axis. The second shows the amount of human deaths and births every day). PS! Keeping this on decreases fps substantialy every time the graph updates (one time every second)
-B - Shows supply stats (Food, ammo and medicine)
-F - Shows fps.
+- G - Cycle through graphs (The first shows human/zombie population on the y-axis with time in days on the x-axis. The second shows the amount of human deaths and births every day). PS! Keeping this on decreases fps substantialy every time the graph updates (one time every second)
+- B - Shows supply stats (Food, ammo and medicine)
+- F - Shows fps.
+
+##### Info:
+- Green circles are forests, red structures are buildings, Gray area is the base. Dark red humans are guards.
