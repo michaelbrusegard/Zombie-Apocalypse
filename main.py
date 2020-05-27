@@ -9,7 +9,7 @@ pygame.init()
 pygame.mixer.init()
 
 pygame.mixer.music.load('music.ogg')
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.play(-1)
 
 menu = True
 humantext = classes.textInput(config.line_spacing, config.line_spacing, 140, config.font_size, '  humans', config.amount_humans)
