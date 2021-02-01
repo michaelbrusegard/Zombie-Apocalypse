@@ -1,13 +1,8 @@
 # Zombie Apocalypse
-
-#### Requirements:
-* Python3 (Used versions 3.8.1, 3.8.2 and 3.8.3) *When installing, remember to check 'td/tk and IDLE' if not checked matplotlib will not work*
-* Pygame (Used version 2.0.0dev6) *Install using 'pip3 install pygame==2.0.0dev6' in terminal*
-* Jupyter *Run 'pip3 install jupyter'*
-
+This is a simple simulation I and some of my fellow students made in High School. It can be improved and is unfinished compared to what our ideas and ambitions was, but it works :). The simulation simulates the last group of humans (represented by red and dark red rectangles), who are trying to survive when zombies (represented by lime rectangles) appear around them. The humans must gather food from the forests aswell as ammo and medicine from the houses nearby. The zombies try to run and kill the humans, and if they do there is a chance that the human turns into a new zombie. If the humans have ammo the human is also able to kill the zombies by a slim chance. The guards (dark red rectangles) have a much greater chance of killing zombies and follow the gatherers around.
 ##### Menu Variables
-* Humans is the amount of humans spawned in the base at start.
-* Zombies is the amount of zombies that are added on the start of the simulation.
+* Humans are the amount of humans spawned in the base at start.
+* Zombies are the amount of zombies that are added on the start of the simulation.
 * Tracking distance is the distance a zombie can see humans and run to them.
 * Shooting distance is the range guards can shoot zombies. Guards are faster humans with guns in a draker shade of red. They protect the humans getting supplies.
 * Food is the amount of food humans start with. If they run out of food they will begin dying.
