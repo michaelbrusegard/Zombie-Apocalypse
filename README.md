@@ -16,3 +16,4 @@ This is a simple simulation I and some of my fellow students made in High School
 
 ##### Info:
 - Green circles are forests, red structures are buildings, Gray area is the base. Dark red humans are guards.
+- At the base walls many zombies die easily because they have to climb the walls.
